@@ -1,6 +1,8 @@
 #!/bin/sh
 echo 'Run migration'
 python3 /app/src/manage.py migrate
+echo 'Inject testing data'
+python3 /app/src/manage.py loaddata /db-testing-data.json --exclude=users.user
 echo 'Create super user'
 python3 /app/src/manage.py createsuperuser --noinput || echo "Super user already created"
 echo 'Compile localized translation'
